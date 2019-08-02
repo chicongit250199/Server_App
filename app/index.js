@@ -1,5 +1,4 @@
 /* eslint no-console: 0 */
-
 const Hapi = require('hapi');
 const Inert = require('inert');
 const Vision = require('vision');
@@ -11,10 +10,8 @@ const CONSTANTS = require('./constants/index');
 require('dotenv').config();
 
 const server = new Hapi.Server({
-  // host: process.env.APP_HOST,
-  host: process.env.HOST,
-  // port: process.env.APP_PORT,
-  port: process.env.PORT,
+  host: process.env.APP_HOST || process.env.HOST,
+  port: process.env.APP_PORT || process.env.PORT,
   routes: {
     cors: true,
     validate: {
@@ -48,18 +45,25 @@ const apiVersionOptions = {
 const swaggerOptions = {
   pathPrefixSize: 3,
   host: process.env.HOST,
+  // port: process.env.PORT,
   basePath: apiVersionOptions.basePath,
   info: {
     title: ' Enclave Engineering Management RESTful API Documentation',
-    description:
-      'This is API documentation.' 
-      
+    description: 'This is API documentation.'
   },
-  deReference: false
+  deReference: false,
+  securityDefinitions: {
+    Bearer: {
+      type: 'apiKey',
+      name: 'Authorization',
+      in: 'header'
+    }
+  },
+  security: [{ Bearer: [] }]
 };
 
 process.on('uncaughtException', err => {
-  console.log(err, 'Uncaught exception');
+  console.log(err, '===>Uncaught exception');
   process.exit(1);
 });
 

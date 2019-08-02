@@ -14,12 +14,23 @@ class EngineerValidator extends BaseValidator {
       lastName: Joi.string().required(),
       englishName: Joi.string().required(),
       phoneNumber: super.strPhoneNumber().required(),
-      address: Joi.string().required(),
-      email: super.strEmail().required(),
-      skype: super.strEmail().required(),
       expYear: Joi.number().required(),
+      avatar: Joi.string(),
+      birthday: Joi.string().required(),
+      gender: Joi.string(),
+      address: Joi.string().required(),
+      nationality: Joi.string(),
+      dateIn: Joi.string(),
+      salary: Joi.number().required(),
+      email: super.strEmail().required(),
+      skype: Joi.string().required(),
       status: Joi.number().required(),
-      skills: Joi.array().items(Joi.number())
+      skills: Joi.array().items(
+        Joi.object({
+          id: Joi.number().required(),
+          expYear: Joi.number().required()
+        })
+      )
     };
   }
 
@@ -29,12 +40,26 @@ class EngineerValidator extends BaseValidator {
       lastName: Joi.string(),
       englishName: Joi.string(),
       phoneNumber: super.strPhoneNumber(),
-      address: Joi.string(),
-      email: super.strEmail(),
-      skype: super.strEmail(),
       expYear: Joi.number(),
+      avatar: Joi.string(),
+      address: Joi.string(),
+      nationality: Joi.string(),
+      birthday: Joi.string(),
+      gender: Joi.string(),
+      dateIn: Joi.string(),
+      dateOut: Joi.string(),
+      dayOffRemain: Joi.number(),
+      overTime: Joi.number(),
+      salary: Joi.number(),
+      email: super.strEmail(),
+      skype: Joi.string(),
       status: Joi.number(),
-      skills: Joi.array().items(Joi.number())
+      skills: Joi.array().items(
+        Joi.object({
+          id: Joi.number(),
+          expYear: Joi.number()
+        })
+      )
     };
   }
 }

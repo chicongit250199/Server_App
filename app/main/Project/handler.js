@@ -14,6 +14,16 @@ exports.getMany = {
     query: validator.queryParams
   }
 };
+exports.getManyBy = {
+  description: 'Group project',
+  notes: 'Group project by status',
+  tags: ['api', 'v1'],
+  handler: controller.getManyBy.bind(controller),
+  auth: false,
+  validate: {
+    query: validator.getStatus
+  }
+};
 
 exports.getOne = {
   description: 'Get a project',
@@ -33,7 +43,10 @@ exports.createOne = {
   notes: 'Return created project',
   tags: ['api', 'v1'],
   handler: controller.createOne.bind(controller),
-  auth: false,
+  auth: {
+    strategy: 'jwt',
+    scope: ['Director', 'HR', 'PM']
+  },
   validate: {
     payload: validator.create
   }
@@ -44,7 +57,10 @@ exports.updateOne = {
   notes: 'Return updated project by id',
   tags: ['api', 'v1'],
   handler: controller.updateOne.bind(controller),
-  auth: false,
+  auth: {
+    strategy: 'jwt',
+    scope: ['Director', 'HR', 'PM']
+  },
   validate: {
     params: {
       id: validator.idParam
@@ -58,10 +74,20 @@ exports.deleteOne = {
   notes: 'Return deleted project by id',
   tags: ['api', 'v1'],
   handler: controller.deleteOne.bind(controller),
-  auth: false,
+  auth: {
+    strategy: 'jwt',
+    scope: ['Director', 'HR', 'PM']
+  },
   validate: {
     params: {
       id: validator.idParam
     }
   }
+};
+exports.sumEarning = {
+  description: 'Get sum eaning of all project',
+  notes: 'Return sum earning',
+  tags: ['api', 'v1'],
+  handler: controller.sumEarning.bind(controller),
+  auth: false
 };

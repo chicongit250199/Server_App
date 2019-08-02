@@ -1,11 +1,102 @@
 const BaseController = require('../../base/BaseController');
-const dashboardService = require('./service');
+const DashboardService = require('./service');
 
-class dashboardController extends BaseController {
+class DashboardController extends BaseController {
   constructor() {
-    // eslint-disable-next-line new-cap
-    super(new dashboardService());
+    super(new DashboardService());
+  }
+
+  async cashFlow(request) {
+    try {
+      const { year } = request.params;
+      return await this.service.cashFlow(year);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getProject(request) {
+    try {
+      return await this.service.getProject(request.query);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getTotal(request) {
+    try {
+      return await this.service.getTotal(request.query);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getStatisticEngineerStatus() {
+    try {
+      return await this.service.getStatisticEngineerStatus();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async salary(request) {
+    try {
+      return await this.service.salary(request.params);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async workStatus(request) {
+    try {
+      const { year } = request.params;
+      return await this.service.workStatus(year);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getStatisticProjectEarningByMonth(request) {
+    try {
+      const { year } = request.params;
+      return await this.service.getStatisticProjectEarningByMonth(year);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStatisticEngineerSw() {
+    try {
+      return await this.service.getStatisticEngineerSw();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStatisticEngineerSalary() {
+    try {
+      return await this.service.getStatisticEngineerSalary();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStatisticEngineerGender() {
+    try {
+      return await this.service.getStatisticEngineerGender();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStatistiProjectByYear(request) {
+    try {
+      const { year } = request.params;
+      return await this.service.getStatistiProjectByYear(year);
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
-module.exports = dashboardController;
+module.exports = DashboardController;

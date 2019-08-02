@@ -27,4 +27,5 @@ const Routes = [
     config: Handler.deleteOne
   }
 ];
+
 module.exports = Routes;
