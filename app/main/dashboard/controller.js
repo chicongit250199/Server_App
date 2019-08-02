@@ -97,6 +97,39 @@ class DashboardController extends BaseController {
       throw error;
     }
   }
+
+  async getStatisticTeamAndProject() {
+    try {
+      return await this.service.getStatisticTeamAndProject();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStatistiProjectCategory() {
+    try {
+      return await this.service.getStatistiProjectCategory();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStatistiProjectLocation(request) {
+    try {
+      const { year } = request.query;
+      return await this.service.getStatistiProjectLocation(year);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStatistiSalaryTeam() {
+    try {
+      return await this.service.getStatistiSalaryTeam();
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = DashboardController;
