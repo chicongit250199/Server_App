@@ -80,7 +80,6 @@ class EngineerService extends BaseService {
       delete payload.skills;
       payload.birthday = moment(payload.birthday);
       payload.dateIn = moment(payload.dateIn);
-      payload.expYear = moment().diff(payload.dateIn, 'year', false);
       const engineer = await Models.Engineer.query().insert(payload);
       await engineer
         .$relatedQuery('skills')
@@ -150,6 +149,12 @@ class EngineerService extends BaseService {
   // start delete (update deleteAt)
   async deleteOne(id, authData) {
     try {
+      const check = await Models.Manager.query()
+        .where('engineerId', id)
+        .select('id');
+      if (check.length !== 0) {
+        throw Boom.forbidden('You can not delete it');
+      }
       const result = await Models.Engineer.query()
         .findById(id)
         .update({
@@ -159,7 +164,6 @@ class EngineerService extends BaseService {
       if (!result) {
         throw Boom.notFound(`Not found`);
       }
-
       const fireStoreData = {
         userId: authData.id,
         name: authData.englishName,
